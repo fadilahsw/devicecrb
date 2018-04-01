@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { ActionSheetController } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { SocialSharing } from '@ionic-native/social-sharing';
 
 @Component({
   selector: 'page-home',
@@ -10,7 +11,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 export class HomePage {
 	img
 
-  constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, private camera: Camera) {
+  constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, private camera: Camera, private socialSharing: SocialSharing) {
 
   }
 
@@ -19,15 +20,27 @@ export class HomePage {
       title: 'Modify your album',
       buttons: [
         {
-          text: 'Destructive',
-          role: 'destructive',
+          text: 'Facebook',
+          // role: 'destructive',
           handler: () => {
-            console.log('Destructive clicked');
+            this.socialSharing.shareViaFacebook('messageFB', this.img).then(() => {
+            	console.log('success share to fb');
+			  // Success!
+			}).catch(() => {
+            	console.log('error share to fb');
+			  // Error!
+			});
           }
         },{
-          text: 'Archive',
+          text: 'Instagram',
           handler: () => {
-            console.log('Archive clicked');
+            this.socialSharing.shareViaInstagram('messageInst', this.img).then(() => {
+            	console.log('success share to insta');
+			  // Success!
+			}).catch(() => {
+            	console.log('error share to insta');
+			  // Error!
+			});
           }
         },{
           text: 'Cancel',
