@@ -8,6 +8,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
   templateUrl: 'home.html'
 })
 export class HomePage {
+	img
 
   constructor(public navCtrl: NavController, public actionSheetCtrl: ActionSheetController, private camera: Camera) {
 
@@ -52,6 +53,7 @@ export class HomePage {
 	 // imageData is either a base64 encoded string or a file URI
 	 // If it's base64:
 	 let base64Image = 'data:image/jpeg;base64,' + imageData;
+	 this.img = base64Image;
 	}, (err) => {
 	 // Handle error
 	});
